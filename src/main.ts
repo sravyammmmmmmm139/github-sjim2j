@@ -1,21 +1,12 @@
-// import required packages
-import 'zone.js/dist/zone';
-import { Component } from '@angular/core';
-import { bootstrapApplication } from '@angular/platform-browser';
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-// describe component
-@Component({
-  selector: 'add-one-button', // component name used in markup
-  standalone: true, // component is self-contained
-  template: // the component's markup
-  `
-   <button (click)="count = count + 1">Add one</button> {{ count }}
-  `,
-})
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
 
-// export component
-export class AddOneButtonComponent {
-  count = 0;
+if (environment.production) {
+  enableProdMode();
 }
 
-bootstrapApplication(AddOneButtonComponent);
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
